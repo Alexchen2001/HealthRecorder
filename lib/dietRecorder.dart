@@ -71,9 +71,10 @@ class _DietRecorderAppState extends State<DietRecorderApp> {
                   if (dietInput != null && calorieInput != null){
                     logEntries.add('Ate $dietInput that is $calorieInput at${now.year}-${now.month}-${now.day} ${now.hour}:${now.minute}');
                     dietEntries.add(dietInput!);
+                    Provider.of<UserActivityProvider>(context, listen: false).recordActivity('Diet');
                   }
                 });
-                Provider.of<UserActivityProvider>(context, listen: false).recordActivity('Diet');
+
               },
               child: const Text('Submit')
             ),

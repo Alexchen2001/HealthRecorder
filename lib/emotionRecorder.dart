@@ -55,8 +55,9 @@ class _EmotionRecorderAppState extends State<EmotionRecorderApp> {
                       if (emojiSelected != null){
                         setState(() {
                           logEntries.add('I feel like $emojiSelected at${now.year}-${now.month}-${now.day} ${now.hour}:${now.minute}');
-                        });
-                        Provider.of<UserActivityProvider>(context, listen: false).recordActivity('Emotion');
+                          Provider.of<UserActivityProvider>(context, listen: false).recordActivity('Emotion');
+                          });
+
                       }
                     },
                     child: const Text('Submit')

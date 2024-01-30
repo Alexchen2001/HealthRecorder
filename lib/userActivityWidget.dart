@@ -17,16 +17,29 @@ class UserActivityWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Last Recorded: ${activityProvider.lastRecordingType} on ${activityProvider.lastRecordingTime}',
-                style: TextStyle(fontSize: 10)),
+                style: const TextStyle(fontSize: 10)),
             Text('Recording Points: ${activityProvider.recordingPoints}',
-              style: TextStyle(fontSize: 10)),
+              style: const TextStyle(fontSize: 10)),
             Text('Dedication Level: ${activityProvider.dedicationLevel}',
-              style: TextStyle(fontSize: 10)),
+              style: const TextStyle(fontSize: 10)),
             Text('Points for Next Recording: ${activityProvider.potentialPoints()}',
-              style: TextStyle(fontSize: 10)),
+              style: const TextStyle(fontSize: 10)),
           ],
         )
-            : Text('No recent activity recorded'),
+            : Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Nothing was Recorded Yet',
+                style: TextStyle(fontSize: 10)),
+            Text('Recording Points: ${activityProvider.recordingPoints}',
+                style: const TextStyle(fontSize: 10)),
+            Text('Dedication Level: ${activityProvider.dedicationLevel}',
+                style: const TextStyle(fontSize: 10)),
+            Text('Points for Next Recording: ${activityProvider.potentialPoints()}',
+                style: const TextStyle(fontSize: 10)),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 // Alexander Chen
-// CPSC 5250 Homework 1
+// CPSC 5250 Homework 2
 // SUID: 4186272
 
 

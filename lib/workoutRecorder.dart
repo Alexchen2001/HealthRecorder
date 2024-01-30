@@ -56,8 +56,9 @@ class _WorkoutRecorderAppState extends State<WorkoutRecorderApp> {
                 if (selectedWorkout != null && workoutAmt != null){
                   setState(() {
                     logEntries.add('Workout: $selectedWorkout Quantity: $workoutAmt at${now.year}-${now.month}-${now.day} ${now.hour}:${now.minute}');
+                    Provider.of<UserActivityProvider>(context, listen: false).recordActivity('Workout');
                   });
-                  Provider.of<UserActivityProvider>(context, listen: false).recordActivity('Workout');
+
                 }
               },
               child: const Text('Submit')

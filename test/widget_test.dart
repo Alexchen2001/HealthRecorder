@@ -7,6 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../lib/userActivityProvider.dart';
+import 'package:provider/provider.dart';
 import '../lib/emotionRecorder.dart';
 import '../lib/dietRecorder.dart';
 import '../lib/workoutRecorder.dart';
@@ -16,7 +18,10 @@ void main() {
   testWidgets('emotionRecorder Test : Select emoji and time appear in list', (WidgetTester tester) async {
 
     // finds dropdown menu
-    await tester.pumpWidget(MaterialApp(home:EmotionRecorderApp()));
+    await tester.pumpWidget(ChangeNotifierProvider(
+      create: (context) => UserActivityProvider(),
+      child: MaterialApp(home: EmotionRecorderApp()),
+    ));
     expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
     await tester.tap(find.byType(DropdownButtonFormField<String>));
     await tester.pumpAndSettle();
@@ -38,7 +43,10 @@ void main() {
   
   testWidgets('DietRecorder: exercise, metric and time all entered', (WidgetTester tester) async{
     // starts the app and finds the input areas
-    await tester.pumpWidget(MaterialApp(home:DietRecorderApp()));
+    await tester.pumpWidget(ChangeNotifierProvider(
+      create: (context) => UserActivityProvider(),
+      child: MaterialApp(home: DietRecorderApp()),
+    ));
     expect(find.byType(TextField), findsWidgets);
     
     //inputs content into those areas
@@ -53,12 +61,36 @@ void main() {
 
     DateTime now = DateTime.now();
     expect(find.textContaining('Ate $food that is $calorie at${now.year}-${now.month}-${now.day} ${now.hour}:${now.minute}'),findsOneWidget);
-    
+
+    // checks for whether if there is a dropdownmenu for previous entry
+    expect(find.byType(DropdownButton<String>), findsWidgets);
+    await tester.tap(find.byType(DropdownButton<String>));
+    await tester.pumpAndSettle();
+
+    //taps the item in that list
+    await tester.tap(find.text(food).last);
+    await tester.pumpAndSettle();
+
+    //Enters a different number to see if it works
+    String calorieOne = '1';
+    await tester.enterText(find.byType(TextField).at(1), calorieOne);
+
+    // pressing the submit button
+    await tester.tap(find.byType(ElevatedButton));
+    await tester.pump();
+
+    DateTime curr = DateTime.now();
+    expect(find.textContaining('Ate $food that is $calorieOne at${curr.year}-${curr.month}-${curr.day} ${curr.hour}:${curr.minute}'),findsOneWidget);
+
+
   });
-  
+  /**/
   testWidgets('Workout Recorder: ', (WidgetTester tester) async{
     //checks if has all components
-    await tester.pumpWidget(MaterialApp(home:WorkoutRecorderApp()));
+    await tester.pumpWidget(ChangeNotifierProvider(
+      create: (context) => UserActivityProvider(),
+      child: MaterialApp(home: WorkoutRecorderApp()),
+    ));
     expect(find.byType(DropdownButtonFormField<String>),findsOneWidget);
     expect(find.byType(TextField),findsOneWidget);
     
