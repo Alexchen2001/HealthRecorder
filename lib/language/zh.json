@@ -1,0 +1,57 @@
+{
+  "appTitle": "健康观察器",
+  "emotionRecorderTitle": "心情记录仪",
+  "dietRecorderTitle": "饮食记录仪",
+  "workoutRecorderTitle": "运动记录仪",
+
+  "emotionTab": "心情",
+  "dietTab": "饮食",
+  "workoutTab": "健身",
+
+  "cancel": "取消",
+  "delete": "删除",
+  "edit": "编辑",
+  "update": "更新",
+  "Submit": "提交",
+  "warning": "系统提示",
+
+
+  "emotionRecordTxt": "记录你的心情",
+  "selectEmoji": "选择表情！",
+  "emotionalLog": "情感记录",
+  "recordMsg": "我今天的心情是",
+
+  "PrevDietLabel": "选择已有饮食",
+  "dietLabel": "餐食",
+  "caloriesLabel": "卡路里",
+  "editCalories": "编辑卡路里数值",
+  "editCaloriesHint": "输入新的卡路里数值",
+  "dietLogs": "饮食记录",
+  "dietRMsg": "我吃了",
+  "dietContMsg" : "含有",
+
+
+  "emptyField": "不允许空白区域",
+  "workoutLogs": "运动记录",
+  "setAmount": "运动亮 （组）",
+  "workoutRecord": "运动:",
+  "setRecord": "运动量:",
+  "running": "跑步",
+  "weightLifting": "举重",
+  "HIIT": "HIIT",
+  "Yoga": "瑜伽",
+  "crossFit": "混合健身",
+  "kickBoxing": "自由搏击",
+  "danceFit": "跳舞",
+  "planks": "平板支撑",
+
+  "noRecord": "目前没有记录",
+  "lastRecord": "上次记录:",
+  "recordingPts" : "记录点数",
+  "dedicationLevel": "专注级别:",
+  "nextRecording": "离升级还差:",
+
+  "chooseLanguage": "选择语言",
+  "en": "英语",
+  "zh": "简体中文"
+}

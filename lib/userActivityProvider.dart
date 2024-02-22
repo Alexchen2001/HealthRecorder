@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'floor_model/health_database.dart';
+import 'floor_model/emotion_recorder_entity.dart';
+import 'floor_model/diet_recorder_entity.dart';
+import 'floor_model/workout_recorder_entity.dart';
+import 'package:intl/intl.dart';
 
 class UserActivityProvider with ChangeNotifier {
+  final AppDatabase database;
   DateTime? _lastRecordingTime;
   String? _lastRecordingType;
-  int _recordingPts = 0;
+  int _recordingPts  = 0;
   int _ptsIncremented = 5;
 
   DateTime? get lastRecordingTime => _lastRecordingTime;
@@ -11,28 +17,65 @@ class UserActivityProvider with ChangeNotifier {
   int get recordingPoints => _recordingPts;
   int get dedicationLevel => _calculateDedicationLevel();
 
-  void recordActivity(String type) {
-    _updateRecordingPoints();
-    _updateLastRecordingTime();
-    _updateLastRecordingType(type);
+  UserActivityProvider({required this.database});
+
+  Future<void> showPtsAndAct() async {
+    final int emotionPts = await database.emotionRecorderDao.getSumOfPoints() ?? 0;
+    final int dietPts = await database.dietRecorderDao.getSumOfPoints() ?? 0;
+    final int workoutPts = await database.workoutRecorderDao.getSumOfPoints() ?? 0;
+
+    _recordingPts = emotionPts + dietPts + workoutPts;
+
+    final EmotionEntry? lastEmotion = await database.emotionRecorderDao.getLastRecord();
+    final DietEntry? lastDiet = await database.dietRecorderDao.getLastRecord();
+    final WorkoutEntry? lastWorkout = await database.workoutRecorderDao.getLastRecord();
+
+    final DateFormat format = DateFormat('yyyy-MM-dd HH:mm:ss');
+
+    List<MapEntry<String, DateTime>> actCompGroup = [];
+
+    // checks for empty entry
+    if (lastEmotion != null) {
+      actCompGroup.add(MapEntry('Emotion', format.parse(lastEmotion.recordedTime)));
+    }
+    if (lastDiet != null) {
+      actCompGroup.add(MapEntry('Diet', format.parse(lastDiet.recordedTime)));
+    }
+    if (lastWorkout != null) {
+      actCompGroup.add(MapEntry('Workout', format.parse(lastWorkout.recordedTime)));
+    }
+
+    actCompGroup.sort((a, b) => b.value.compareTo(a.value));
+
+    if (actCompGroup.isNotEmpty) {
+      final latestActivity = actCompGroup.first;
+      _lastRecordingTime = latestActivity.value;
+      _lastRecordingType = latestActivity.key;
+    }
+
     notifyListeners();
+
   }
 
-  void _updateLastRecordingTime() {
-    _lastRecordingTime = DateTime.now();
-  }
-
-  void _updateLastRecordingType(String type) {
-    _lastRecordingType = type;
+  int recordActivity(String type) {
+    int cPts;
+    cPts = _updateRecordingPoints();
+    showPtsAndAct();
+    notifyListeners();
+    return cPts;
   }
 
   // updates RP, if initial record adds 100 points
-  void _updateRecordingPoints() {
+  int _updateRecordingPoints() {
+    int cPts;
     if (_lastRecordingTime != null) {
-      _recordingPts += _calculatePoints(_ptsIncremented);
+      cPts =  _calculatePoints(_ptsIncremented);
+      _recordingPts += cPts;
     }else{
-      _recordingPts += 100;
+      cPts = 100;
+      _recordingPts += cPts;
     }
+    return cPts;
   }
 
  // increment by 5 points everytime, max: 100
@@ -53,3 +96,5 @@ class UserActivityProvider with ChangeNotifier {
     return (_ptsIncremented + 5) % 100;
   }
 }
+
+

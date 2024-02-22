@@ -1,0 +1,56 @@
+{
+  "appTitle": "Health Monitor",
+  "emotionRecorderTitle": "Emotion Recorder",
+  "dietRecorderTitle": "The Diet Recorder",
+  "workoutRecorderTitle": "The Workout Recorder",
+
+  "emotionTab": "Emotion",
+  "dietTab": "Diet",
+  "workoutTab": "Workout",
+
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "edit": "Edit",
+  "update": "Update",
+  "Submit": "Submit",
+  "warning": "Warning",
+
+
+  "emotionRecordTxt": "Record your emotion",
+  "selectEmoji": "Select the Emoji!",
+  "emotionalLog": "Emotional Logs",
+  "recordMsg": "I feel like",
+
+  "PrevDietLabel": "Select Previous Diet",
+  "dietLabel": "Diet Description",
+  "caloriesLabel": "Calorie Amount",
+  "editCalories": "Edit Calorie Entry",
+  "editCaloriesHint": "Enter new calorie amount",
+  "dietLogs": "Diet Logs",
+  "dietRMsg": "I Ate ",
+  "dietContMsg" : "that is ",
+
+  "emptyField": "No Blanks Allowed",
+  "workoutLogs": "Workout Logs",
+  "setAmount": "Quantity (Enter by Sets)",
+  "workoutRecord": "Workout:",
+  "setRecord": "Quantity:",
+  "running": "Running",
+  "weightLifting": "Weight Lifting",
+  "HIIT": "HIIT",
+  "Yoga": "Yoga",
+  "crossFit": "Cross Fit",
+  "kickBoxing": "KickBoxing",
+  "danceFit": "Dance Fitness",
+  "planks": "Planks",
+
+  "noRecord": "Nothing was Recorded Yet",
+  "lastRecord": "Last Recorded:",
+  "recordingPts" : "recordingP Points:",
+  "dedicationLevel": "Dedication Level:",
+  "nextRecording": "Points for Next Recording:",
+
+  "chooseLanguage": "Choose Language",
+  "en": "English",
+  "zh": "Chinese(Simplified)"
+}
